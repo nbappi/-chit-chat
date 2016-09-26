@@ -1,12 +1,17 @@
 var socket = io('http://localhost:3000');
-var joinButton = document.getElementById("joinButton");
-var text = document.getElementById("inputText");
-var userList = document.getElementById("userList");
-var userBoard = document.getElementById("userBoard");
+
+var elem = function(el){
+   return document.querySelector(el);
+};
+
+var joinButton = elem('#joinButton'), 
+    text = elem("#inputText"), 
+    userList = elem("#userList"),
+    userBoard = elem("#userBoard");
 
 joinButton.onclick = function(){
 	socket.emit("join or create", { username : text.value});
-	socket.on('join', function(data){      
+	socket.on('join', function(data){ 
        displayUserWithHtml(data.users);
 	});
 
@@ -16,10 +21,15 @@ joinButton.onclick = function(){
 };
 
 function displayUserWithHtml(data){
-	   var users='';
+	   var users='<table>';
        data.forEach(function(row){
-          users += row +'-';
+          users += '<tr><td><a href="#" onclick="helloClick(row)">'+ row+'</a></td></tr>';
        });
+       users += '</table>';
        userList.innerHTML = users;
        userBoard.style.display = 'none';
+}
+
+function helloClick(row) {
+	console.log('Hello From Chit Chat'+row);
 }
