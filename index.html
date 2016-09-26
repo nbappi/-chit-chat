@@ -4,15 +4,16 @@
 	<title>Chit chat</title>
 </head>
 <body>
-<p>Chit chat</p>
+<h3>Chit chat</h3>
    <div>
-   	  <div>  
-	    <input type="text" id="inputText" placeholder="Enter username."><br /><br />
-	    <button id="joinButton">Join</button>
+   	  <div id="userBoard">  
+  	    <input type="text" id="inputText" placeholder="Enter username.">
+  	    <button id="joinButton">Join</button>
       </div> 
    </div>
    <div>
-     <span id="messages">Message</span>
+      <p>User List</p>
+      <div id="userList"></div> 
    </div>
 
     <script src="/socket.io/socket.io.js"></script>

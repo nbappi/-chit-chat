@@ -11,8 +11,22 @@ http.listen(port, function(){
 
 app.use(express.static(__dirname));
 
+var users = [];
 io.on("connection", function(socket){
    socket.on("join or create", function(data){
-      socket.join();
+   	  socket.username = data.username;
+   	  users.push(socket.username);
+      socket.join(socket.username);
+      io.emit("join", { users : users});
+   });
+
+   socket.on("disconnect", function(){
+   	   for(var i=0; i< users.length; i++){
+          if(users[i] == socket.username){
+            users.splice(i,1);
+            break;
+          }
+   	   }
+   	  io.emit("leaveUser", { users : users});
    });
 });
