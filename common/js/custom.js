@@ -23,7 +23,7 @@ joinButton.onclick = function(){
 function displayUserWithHtml(data){
 	   var users='<table>';
        data.forEach(function(row){
-          users += '<tr><td><a href="#" onclick="helloClick(row)">'+ row+'</a></td></tr>';
+          users += '<tr><td><a href="#" onclick="helloClick('+row+')">'+ row+'</a></td></tr>';
        });
        users += '</table>';
        userList.innerHTML = users;
@@ -31,5 +31,6 @@ function displayUserWithHtml(data){
 }
 
 function helloClick(row) {
+	
 	console.log('Hello From Chit Chat'+row);
 }
